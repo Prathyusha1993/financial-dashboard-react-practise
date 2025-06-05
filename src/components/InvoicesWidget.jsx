@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { mockInvoices, transactions } from "../data/mockData";
 import { Table } from "react-bootstrap";
 
-function InvoicesWidget() {
+function InvoicesWidget({invoices, setInvoices, transactions}) {
   const [showInputForm, setShowInputForm] = useState(false);
   const [newInvoice, setNewInvoice] = useState({
     client: "",
@@ -10,7 +9,6 @@ function InvoicesWidget() {
     referenceNo: "",
     amount: 0,
   });
-  const [invoices, setInvoices] = useState(mockInvoices);
   const [editingInvoiceId, setEditingInvoiceId] = useState(null);
 
   const handleInputChange = (e) => {
@@ -24,6 +22,7 @@ function InvoicesWidget() {
 
   const handleSaveClick = () => {
     const invoiceToAdd = { ...newInvoice };
+    console.log("Saving invoice with date:", invoiceToAdd.creation_date);
     setInvoices([...invoices, invoiceToAdd]);
     setNewInvoice({
       client: "",
